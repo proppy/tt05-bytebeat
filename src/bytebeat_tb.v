@@ -1,6 +1,9 @@
 // Copyright 2023 Google LLC.
 // SPDX-License-Identifier: Apache-2.0
 
+`default_nettype none
+`timescale 1us/100ns
+
 module bytebeat_tb;
   reg clk;
   reg rst;
@@ -27,7 +30,8 @@ module bytebeat_tb;
     .bytebeat__output_s(out0),
     .bytebeat__output_s_vld(out0_valid));
 
-  always #1 clk = !clk;
+  // clock period is 62.5 * 2 = 0.125ms == 8000hz
+  always #62.5 clk = !clk; 
 
   initial begin
     $dumpfile("test.vcd");
@@ -38,13 +42,13 @@ module bytebeat_tb;
     b <= 4'd7;
     c <= 4'd3;
     d <= 4'd10;
-    #1  rst <= 0;
-    #65536 rst <= 1;
+    #125 rst <= 0;
+    #8192000 rst <= 1;
     a <= 4'd3;
     b <= 4'd6;
     c <= 4'd2;
     d <= 4'd9;
-    #1  rst <= 0;
-    #65536 $finish;
+    #125 rst <= 0;
+    #8192000  $finish;
   end
 endmodule
