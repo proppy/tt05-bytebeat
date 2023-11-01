@@ -1,3 +1,6 @@
+// Copyright 2023 Google LLC.
+// SPDX-License-Identifier: Apache-2.0
+
 `default_nettype none
 `timescale 1ns/1ps
 

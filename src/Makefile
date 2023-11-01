@@ -1,3 +1,6 @@
+# Copyright 2023 Google LLC.
+# SPDX-License-Identifier: Apache-2.0
+
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
@@ -27,5 +30,3 @@ TOPLEVEL = tb
 MODULE = test
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
-
-
