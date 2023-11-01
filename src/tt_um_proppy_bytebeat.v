@@ -1,5 +1,6 @@
 // Copyright 2023 Google LLC.
 // SPDX-License-Identifier: Apache-2.0
+`default_nettype none
 
 module tt_um_proppy_bytebeat (
 			      input wire [7:0] 	ui_in, // Dedicated inputs
