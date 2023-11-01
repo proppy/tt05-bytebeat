@@ -11,7 +11,7 @@ module tt_um_proppy_bytebeat (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-   wire 	      reset = ! rst_n;
+   wire 	      rst = ! rst_n;
    wire [3:0] 	      a = ui_in[3:0];
    wire [3:0] 	      b = ui_in[7:4];
    wire [3:0] 	      c = uio_in[3:0];
@@ -31,6 +31,6 @@ module tt_um_proppy_bytebeat (
     .bytebeat__output_s_rdy(1'b1),
     .bytebeat__output_s(pcm)
    );
-   assign uio_oe = 8'h00; // set uio as inputs.
+   assign uio_oe = 8'b00000000; // set uio as inputs.
    assign uo_out = pcm; // feed pcm samples to output pins.
 endmodule
