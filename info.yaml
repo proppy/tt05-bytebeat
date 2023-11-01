@@ -1,74 +1,66 @@
 --- 
 # Tiny Tapeout project information
 project:
-  wokwi_id:    0        # If using wokwi, set this to your project's ID
+  wokwi_id:    0
+  source_files:        
+    - bytebeat.v
+    - tt_um_proppy_bytebeat.v
+  top_module:  "tt_um_proppy_bytebeat"
+  tiles: "1x1"
 
-# If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
-# Source files must be in ./src and you must list each source file separately
-#  source_files:        
-#    - counter.v
-#    - decoder.v
-#  top_module:  "tt_um_example"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
-
-# How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"    # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2 or 8x2
-
-# Keep a track of the submission yaml
 yaml_version: 4
 
-# As everyone will have access to all designs, try to make it easy for someone new to your design to know what
-# it does and how to operate it. This info will be automatically collected and used to make a datasheet for the chip.
-#
-# Here is a great example: https://github.com/davidsiaw/tt02-davidsiaw-stackcalc/blob/38c5647f83aad2aec675d566aa3d67b98f0aac81/info.yaml
 documentation: 
-  author:       ""      # Your name
-  title:        ""      # Project title
-  language:     "Wokwi" # other examples include Verilog, Amaranth, VHDL, etc
-  description:  ""      # Short description of what your project does
+  author:       "proppy"      # Your name
+  title:        "bytebeat"      # Project title
+  language:     "xls"
+  description:  "Attempt implement the formula from one of the original [bytebeat](http://countercomplex.blogspot.com/2011/10/algorithmic-symphonies-from-one-line-of.html) [video](https://www.youtube.com/watch?v=tCRPUv8V22o) in hardware.
 
-# Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      Explain how your project works
+     The main module accept parameters from 4x 4-bit parameters buses and generate PCM samples according to the following formula:
+    ```
+    ((t*a)&(t>>b))|((t*c)&(t>>d))
+    ```
+    Derivative of this project can easily be created by editing the formula in [src/bytebeat.x](src/bytebeat.x) and using the [XLS: Accelerated HW Synthesis](https://github.com/google/xls) toolkit to regenerate the Verilog code.
 
-# Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
+    See the following [notebook](https://colab.research.google.com/gist/proppy/1258e007febb077c42ccea1d28e092c4/xls_audio_playground.ipynb) for more information.
+
   how_to_test:  |
-      Explain how to test your project
+      - Tweak parameters pins using a absolute encoders
+      - Feed the data coming from the sample bus to a DAC
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-# A description of what the outputs do (e.g. status LED, SPI MISO, etc)
+    - param `a` bit 0/3
+    - param `a` bit 1/3
+    - param `a` bit 2/3
+    - param `a` bit 3/3
+    - param `b` bit 0/3
+    - param `b` bit 1/3
+    - param `b` bit 2/3
+    - param `b` bit 3/3
   outputs:
-    - segment a
-    - segment b
-    - segment c
-    - segment d
-    - segment e
-    - segment f
-    - segment g
-    - dot
-# A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
+    - pcm sample bit 0/7
+    - pcm sample bit 1/7
+    - pcm sample bit 2/7
+    - pcm sample bit 3/7
+    - pcm sample bit 4/7
+    - pcm sample bit 5/7
+    - pcm sample bit 6/7
+    - pcm sample bit 7/7
   bidirectional:
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
+    - param `c` bit 0/3
+    - param `c` bit 1/3
+    - param `c` bit 2/3
+    - param `c` bit 3/3
+    - param `d` bit 0/3
+    - param `d` bit 1/3
+    - param `d` bit 2/3
+    - param `d` bit 3/3
 
-# The following fields are optional
-  tag:          ""      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
-  external_hw:  ""      # Describe any external hardware needed
-  discord:      ""      # Your discord handle, used for communication and automatically assigning tapeout role after a submission
-  doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
-  clock_hz:     0       # Clock frequency in Hz (if required)
-  picture:      ""      # relative path to a picture in your repository (must be 512kb or less)
+  tag:          "bytebeat, audio, xls"
+  external_hw:  "8bit pcm DAC, rotary encoder"
+  discord:      "proppy#5890"
+  doc_link:     "https://colab.research.google.com/gist/proppy/1258e007febb077c42ccea1d28e092c4/xls_audio_playground.ipynb"
+  clock_hz:     8000
+  picture:      "waveform.png"
