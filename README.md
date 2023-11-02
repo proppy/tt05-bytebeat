@@ -6,7 +6,7 @@ Attempt implement the formula from one of the original [bytebeat](http://counter
 
 ![img](layout.png)
 ![img](waveform.png)
-https://github.com/proppy/tt05-bytebeat/assets/5268/edfd4d4f-94a8-4275-9d15-6ad28c444020
+https://github-production-user-asset-6210df.s3.amazonaws.com/5268/279834868-edfd4d4f-94a8-4275-9d15-6ad28c444020.mp4
 
 ## How it works
 
